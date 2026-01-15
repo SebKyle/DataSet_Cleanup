@@ -103,10 +103,10 @@ class SalaryAnalytics:
                 currency = available[choice - 1]
                 return self._load_data(currency)
             else:
-                print("\n✗ Invalid choice")
+                print("\n Invalid choice")
                 return False
         except ValueError:
-            print("\n✗ Invalid input")
+            print("\n Invalid input")
             return False
     
     def _load_data(self, currency):
