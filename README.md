@@ -67,4 +67,5 @@ Follow the interactive menu to:
 ## Known improvements that could be made
 
 - The Cleanup file uses a JSON Format to help with the typos and other issues present in the dataset, like having Unitedd States VS United states. This could be a separate JSON File that is edited so the Cleanup.py file can be more readable. The same with the Currency conversions for the Analytics.py file
-- This could be made into a web application that sorts the data and contains all of the analytics, instead of having to run two separate python files, but this shows the process of cleaning up the dataset to remove jobs with titles like "bum" that earns $10,000,000 USD a year that's an obvious outlier and bad data. 
+- This could be made into a web application that sorts the data and contains all of the analytics, instead of having to run two separate python files, but this shows the process of cleaning up the dataset to remove jobs with titles like "bum" that earns $10,000,000 USD a year that's an obvious outlier and bad data.
+- The Analytics script logic assumes whenever you are running scripts you are in the DataSet_Cleanup folder, if you are not you'll get errors and it won't work
