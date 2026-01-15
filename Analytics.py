@@ -56,7 +56,7 @@ class SalaryAnalytics:
         self.last_result = None
     
     def _get_exchange_rate(self, row):
-        """Get the appropriate exchange rate for a row, handling OTHER currency"""
+        #Get the appropriate exchange rate for a row, handling OTHER currency
         currency = row[CURRENCY_COL]
         if currency == 'OTHER':
             # Use country-based rate for OTHER currencies
@@ -187,7 +187,6 @@ class SalaryAnalytics:
             result = f"Salary Statistics by Age Group\n"
             result += f"Currency: USD (converted from multiple currencies)\n"
             result += f"Note: All salary amounts have been converted to USD for fair comparison\n"
-            result += f"Note: Excludes 'OTHER' currency entries (INR, PHP, BRL, etc.) due to small sample size\n\n"
             result += age_stats.to_string()
             
             chart_title = 'Median Salary by Age Group (USD - Converted)'
