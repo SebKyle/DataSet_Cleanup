@@ -46,6 +46,25 @@ def clean_dataset(file_path):
     
     print(f"Removed {before_required - len(df):,} rows with missing required fields")
     
+    # Remove invalid/joke job titles
+    job_title_col = 'job title'
+    if job_title_col in df.columns:
+        before_invalid = len(df)
+        
+        # List of invalid job titles or patterns to exclude
+        invalid_titles = [
+            'bum', 'unemployed', 'none', 'n/a', 'na', 'test', 'asdf', 'xxx',
+            'fuck', 'shit', 'student', 'retired', 'homemaker', 'stay at home',
+            'unemployed', 'looking for work', 'between jobs'
+        ]
+        
+        # Filter out rows with invalid job titles (case-insensitive)
+        df_titles_lower = df[job_title_col].str.lower().str.strip()
+        mask = ~df_titles_lower.isin(invalid_titles)
+        df = df[mask]
+        
+        print(f"Removed {before_invalid - len(df):,} rows with invalid/joke job titles")
+    
     # Remove statistical outliers using 3 standard deviations
     before_outliers = len(df)
     if salary_col in df.columns:
@@ -81,7 +100,7 @@ def clean_dataset(file_path):
         # Strip whitespace first
         df[other_currency_col] = df[other_currency_col].str.strip()
         
-        # Create case-insensitive mapping for OTHER currency codes
+        # Fixing variations of OTHER currencies
         other_currency_mapping_lower = {
             'philippine peso': 'PHP',
             'philippine pesos': 'PHP',
@@ -161,7 +180,7 @@ def clean_dataset(file_path):
         # Strip whitespace and normalize multiple spaces
         df[country_col] = df[country_col].str.strip().str.replace(r'\s+', ' ', regex=True)
         
-        # Create case-insensitive mapping by converting keys to lowercase
+        # Fixing typos and variations 
         country_mapping_lower = {
             'us': 'United States',
             'usa': 'United States',
